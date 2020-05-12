@@ -5,6 +5,7 @@ class PokemonSerializer < ActiveModel::Serializer
     # "nickname": "Rusty",
     # "trainer_id": 1,
     attributes :id, :species, :nickname, :trainer_id
+    belongs_to :trainer
 
 
 end 

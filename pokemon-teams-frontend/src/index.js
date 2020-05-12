@@ -35,8 +35,32 @@ document.addEventListener("DOMContentLoaded", () => {
         addPokemonButton.setAttribute("data-trainer-id", `${trainer.id}`)
         
         // add event listener to add pokemon button
-        addPokemonButton.addEventListener("click", () => {
-            
+        addPokemonButton.addEventListener("click", (event) => {
+            event.preventDefault
+            const configObj = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    trainer_id: event.target.dataset.trainerId
+                })
+            }
+
+            fetch(POKEMONS_URL, configObj)
+                .then(resp => resp.json())
+                .then(json => {
+                    if (json.message) {
+                        alert(json.message)
+                    } 
+                    else {
+                        
+                    }
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
         })
         
         // <ul>
@@ -48,9 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((resp) => {
             return resp.json();
         })
-        .then(function pokemon(pokemonData) {
+        .then((trainerData) => {
             //iterate through pokemon
-            pokemonData.forEach(pokemon => {
+            trainerData.pokemons.forEach(pokemon => {
                 
                 // <li>Jacey (Kakuna) 
                 // create an li with appropriate text
@@ -58,15 +82,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 li.innerHTML = `${pokemon.nickname} (${pokemon.species})`
                 li.setAttribute("data-pokemon-id", `${pokemon.id}`)
                 
-                    // <button class="release" data-pokemon-id="140">Release</button></li>
-                    // have a release button for each pokemon
-                    let btn = document.createElement("button");
-                    btn.innerHTML = "Release"
-                    btn.classList.add("release")
-                    
-                    // add elements
-                    li.append(btn)
-                    ul.append(li);
+                // <button class="release" data-pokemon-id="140">Release</button></li>
+                // have a release button for each pokemon
+                let btn = document.createElement("button");
+                btn.innerHTML = "Release"
+                btn.classList.add("release")
+
+                btn.addEventListener("click", (event) => {
+                    event.preventDefault
+                    pokemonNumber = event.target.parentElement.getAttribute("data-pokemon-id")
+
+                    debugger
+                    console.log(event)
+                })
+                
+                // add elements
+                li.append(btn)
+                ul.append(li);
 
                 })
             })
