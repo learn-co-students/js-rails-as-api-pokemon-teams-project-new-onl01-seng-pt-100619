@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
             //render each trainer
             json.forEach(trainer => renderTrainer(trainer))
 
-        })
+        }) 
     }
 
     function renderTrainer(trainer) {
