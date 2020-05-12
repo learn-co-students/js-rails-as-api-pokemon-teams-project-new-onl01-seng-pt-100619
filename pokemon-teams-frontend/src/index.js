@@ -8,7 +8,6 @@ document.addEventListener(DOMContentLoaded, function() {
 })
 
 function fetchTrainers() {
-    console.log('loaded')
     fetch(TRAINERS_URL)
     .then(function(resp) {
         return resp.json()
