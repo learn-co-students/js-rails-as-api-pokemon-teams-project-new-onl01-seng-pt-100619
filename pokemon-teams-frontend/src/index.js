@@ -12,7 +12,6 @@ function fetchTrainers() {
     .then(function(resp) {
         return resp.json()
     }).then(function(trainers) {
-        console.log(trainers)
         for (const trainer of trainers) {
             makeTrainerCard(trainer)
         } 
