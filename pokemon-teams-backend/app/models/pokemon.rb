@@ -1,0 +1,19 @@
+class Pokemon < ApplicationRecord
+  belongs_to :trainer
+
+  validate do 
+    pokemon_count_valid?
+  end 
+
+  private
+
+  def pokemon_count_valid?
+    # byebug
+    if self.trainer.pokemons.length > 6
+      self.errors.add(:team_max, "The maximum number of pokemon is 6!")
+    end 
+  end
+
+
+
+end
