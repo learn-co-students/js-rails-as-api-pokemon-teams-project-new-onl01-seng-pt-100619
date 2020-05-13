@@ -2,12 +2,12 @@ class PokemonsController < ApplicationController
 
     def index
         pokemons = Pokemon.all
-        render json: pokemons
+        render json: pokemons, include: [:trainer]
     end
     
     def show
         pokemon = Pokemon.find(params[:id])
-        render json: pokemon
+        render json: pokemon, include: [:trainer]
     end 
 
     def create 

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // add event listener to add pokemon button
         addPokemonButton.addEventListener("click", (event) => {
             event.preventDefault
-            const configObj = {
+            const addConfigObj = {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -48,14 +48,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
             }
 
-            fetch(POKEMONS_URL, configObj)
+            fetch(POKEMONS_URL, addConfigObj)
                 .then(resp => resp.json())
-                .then(json => {
-                    if (json.message) {
-                        alert(json.message)
+                .then(pkmn => {
+                    if (pkmn.message) {
+                        alert(pkmn.message)
                     } 
                     else {
-                        
+                        //find the pokemon for render pokemon
+                        renderPokemon(pkmn)
                     }
                 })
                 .catch((error) => {
@@ -63,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
         })
         
-        // <ul>
         // create ul
         let ul = document.createElement("ul");
         
@@ -73,36 +73,48 @@ document.addEventListener("DOMContentLoaded", () => {
             return resp.json();
         })
         .then((trainerData) => {
+
             //iterate through pokemon
             trainerData.pokemons.forEach(pokemon => {
-                
-                // <li>Jacey (Kakuna) 
-                // create an li with appropriate text
-                let li = document.createElement("li");
-                li.innerHTML = `${pokemon.nickname} (${pokemon.species})`
-                li.setAttribute("data-pokemon-id", `${pokemon.id}`)
-                
-                // <button class="release" data-pokemon-id="140">Release</button></li>
-                // have a release button for each pokemon
-                let btn = document.createElement("button");
-                btn.innerHTML = "Release"
-                btn.classList.add("release")
-
-                btn.addEventListener("click", (event) => {
-                    event.preventDefault
-                    pokemonNumber = event.target.parentElement.getAttribute("data-pokemon-id")
-
-                    debugger
-                    console.log(event)
-                })
-                
-                // add elements
-                li.append(btn)
-                ul.append(li);
-
-                })
+                renderPokemon(pokemon)
             })
+        })
+        
+        function renderPokemon(pokemon) { 
 
+            // create an li with appropriate text
+            let li = document.createElement("li");
+            li.innerHTML = `${pokemon.nickname} (${pokemon.species})`
+            li.setAttribute("data-pokemon-id", `${pokemon.id}`)
+            
+            // have a release button for each pokemon
+            let releaseButton = document.createElement("button");
+            releaseButton.innerHTML = "Release"
+            releaseButton.classList.add("release")
+            releaseButton.setAttribute("data-pokemon-id", `${pokemon.id}`)
+
+            //add event listener to release button
+            releaseButton.addEventListener("click", (event) => {
+                event.preventDefault
+                pokemonNumber = event.target.dataset.pokemonId
+
+                const releaseConfigObj = {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                }
+    
+                fetch(`${POKEMONS_URL}/${pokemonNumber}`, releaseConfigObj);
+                event.target.parentElement.remove();
+
+            })
+            
+            // add elements
+            li.append(releaseButton)
+            ul.append(li);
+        }
         
         
         // add elements 
