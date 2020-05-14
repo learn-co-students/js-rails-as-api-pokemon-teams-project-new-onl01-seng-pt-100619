@@ -80,11 +80,38 @@ function renderPokemon(pokemon){
     ul.appendChild(li)
 }
 
-function createPokemon(){
-    
+function createPokemon(event){
+    event.preventDefault()
+    const configObj = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({trainer_id: event.target.dataset.trainerId})
+    }
+    fetch(POKEMONS_URL, configObj)
+    .then(resp => resp.json())
+    .then(json => {
+        if (json.message){
+            alert(json.message)
+        } else {
+            renderPokemon(json)
+        }
+    })
 }
 
-function deletePokemon(){
+function deletePokemon(event){
+    event.preventDefault()
+    const configObj = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+    }
+    fetch(`${POKEMONS_URL}/${event.target.dataset.pokemonId}`, configObj)
+    event.target.parentElement.remove()
     
 }
 
