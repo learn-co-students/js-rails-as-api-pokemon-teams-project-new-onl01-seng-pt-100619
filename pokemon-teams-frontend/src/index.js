@@ -40,8 +40,10 @@ function makeTrainerCard(trainer){
     const addPokeButton = document.createElement('button')
     addPokeButton.setAttribute("data-trainer-id", trainer.id) 
     addPokeButton.innerText = "Add Pokemon"
-
     card.appendChild(addPokeButton)
+
+    addPokeButton.addEventListener("click", createPokemon)
+
     // attach event listener to button(click)
     //create new pokemon on backend
     //associate with trainer
@@ -73,8 +75,17 @@ function renderPokemon(pokemon){
     button.setAttribute("data-pokemon-id", pokemon.id)
     button.innerText = "Release"
     li.appendChild(button)
+    button.addEventListener("click", deletePokemon)
 
     ul.appendChild(li)
+}
+
+function createPokemon(){
+    
+}
+
+function deletePokemon(){
+    
 }
 
 
