@@ -40,8 +40,12 @@ function makeTrainerCard(trainer){
     const addPokeButton = document.createElement('button')
     addPokeButton.setAttribute("data-trainer-id", trainer.id) 
     addPokeButton.innerText = "Add Pokemon"
+
     card.appendChild(addPokeButton)
     // attach event listener to button(click)
+    //create new pokemon on backend
+    //associate with trainer
+    //add new pokemon/render to list (use faker gem to get names)
 
     //add Pokemon Team
     const pokemonList = document.createElement('ul')
@@ -72,3 +76,5 @@ function renderPokemon(pokemon){
 
     ul.appendChild(li)
 }
+
+
