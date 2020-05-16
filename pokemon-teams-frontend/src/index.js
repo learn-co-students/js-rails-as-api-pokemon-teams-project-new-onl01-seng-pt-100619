@@ -13,7 +13,7 @@ function fetchTrainers(){
       return resp.json()
     })
     .then(function(trainers){
-      console.log(trainers)
+      
       for (const trainer of trainers){
         makeTrainerCard(trainer)
       }
@@ -24,12 +24,20 @@ function makeTrainerCard(trainer){
   const card = document.createElement('div')
   card.classList += "card"
   card.setAttribute("data-id", trainer.id)
+
   const trainerName = document.createElement('p')
-  trainerName.innerText = trainer.name
+  trainerName.innerText = trainer.name   
   card.appendChild(trainerName)
+
   const addPokeButton = document.createElement('button')
   addPokeButton.setAttribute("data-trainer-id", trainer.id)
   addPokeButton.innerText = "Add Pokemon"
   card.appendChild(addPokeButton)
+
+  const pokemonList = document.createElement('ul')
+  for (const pokemon of trainer.pokemons){
+    
+  }
+
   main.appendChild(card)
 }
