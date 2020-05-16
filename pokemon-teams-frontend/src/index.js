@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function fetchTrainers(){
   fetch(TRAINERS_URL)
-    .then(function(resp)){
+    .then(function(resp){
       return resp.json()
     })
     .then(function(trainers){
