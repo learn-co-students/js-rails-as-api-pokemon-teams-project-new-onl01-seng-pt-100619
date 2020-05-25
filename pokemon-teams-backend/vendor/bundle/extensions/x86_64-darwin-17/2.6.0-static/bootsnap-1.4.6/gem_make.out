@@ -1,0 +1,15 @@
+current directory: /Users/agomez/code/js-rails-as-api-pokemon-teams-project-new-onl01-seng-pt-100619/pokemon-teams-backend/vendor/bundle/gems/bootsnap-1.4.6/ext/bootsnap
+/Users/agomez/.rbenv/versions/2.6.4/bin/ruby -I /Users/agomez/.rbenv/versions/2.6.4/lib/ruby/2.6.0 -r ./siteconf20200519-49443-1mn1onu.rb extconf.rb
+creating Makefile
+
+current directory: /Users/agomez/code/js-rails-as-api-pokemon-teams-project-new-onl01-seng-pt-100619/pokemon-teams-backend/vendor/bundle/gems/bootsnap-1.4.6/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/agomez/code/js-rails-as-api-pokemon-teams-project-new-onl01-seng-pt-100619/pokemon-teams-backend/vendor/bundle/gems/bootsnap-1.4.6/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/agomez/code/js-rails-as-api-pokemon-teams-project-new-onl01-seng-pt-100619/pokemon-teams-backend/vendor/bundle/gems/bootsnap-1.4.6/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20200519-49443-1t01k7g/bootsnap
