@@ -34,8 +34,20 @@ function makeTrainerCard(trainer) {
     card.appendChild(addPokeButton)
 
     const pokemonList = document.createElement('ul')
+    pokemonList.id = `trainer-${trainer.id}-pokemon`
+    card.appendChild(pokemonList)
+    main.appendChild(card)
+
     for (const pokemon of trainer.pokemons) {
-        const pokeLi = document.createElement('li')
+        renderPokemon(pokemon)
+    }
+}
+
+function renderPokemon(pokemon) {
+    const pokemonList = document.getElementById(`trainer-${pokemon.trainer_id}-pokemon`)
+
+
+    const pokeLi = document.createElement('li')
         pokeLi.innerText = `${pokemon.nickname} (${pokemon.species})` 
 
         const releaseButton = document.createElement('button')
@@ -44,12 +56,4 @@ function makeTrainerCard(trainer) {
         releaseButton.innerText = "Release"
         pokeLi.appendChild(releaseButton)
         pokemonList.appendChild(pokeLi)
-    }
-   
-    card.appendChild(pokemonList)
-    main.appendChild(card)
-}
-
-function renderPokemon(pokemon) {
-    
 }
