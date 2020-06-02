@@ -35,11 +35,21 @@ function makeTrainerCard(trainer) {
 
     const pokemonList = document.createElement('ul')
     for (const pokemon of trainer.pokemons) {
-        console.log(pokemon)
+        const pokeLi = document.createElement('li')
+        pokeLi.innerText = `${pokemon.nickname} (${pokemon.species})` 
+
+        const releaseButton = document.createElement('button')
+        releaseButton.classList += "release"
+        releaseButton.setAttribute("data-pokemon-id", pokemon.id)
+        releaseButton.innerText = "Release"
+        pokeLi.appendChild(releaseButton)
+        pokemonList.appendChild(pokeLi)
     }
    
-    
+    card.appendChild(pokemonList)
     main.appendChild(card)
+}
 
-
+function renderPokemon(pokemon) {
+    
 }
