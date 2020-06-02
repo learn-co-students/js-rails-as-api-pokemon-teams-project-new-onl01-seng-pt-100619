@@ -50,12 +50,16 @@ function renderPokemon(pokemon) {
 
 
     const pokeLi = document.createElement('li')
+        pokeLi.id = `poke-${pokemon.id}`
         pokeLi.innerText = `${pokemon.nickname} (${pokemon.species})` 
 
         const releaseButton = document.createElement('button')
         releaseButton.classList += "release"
         releaseButton.setAttribute("data-pokemon-id", pokemon.id)
         releaseButton.innerText = "Release"
+
+        releaseButton.addEventListener('click', releasePokemon)
+
         pokeLi.appendChild(releaseButton)
         pokemonList.appendChild(pokeLi)
 }
@@ -78,11 +82,35 @@ function addPokemon(e) {
 
     fetch(POKEMONS_URL, configObj) 
     .then(function(resp) {
+        if (!resp.ok) {
+            throw Error(resp.statusText)
+        }
     return resp.json()
     })
     .then(function(pokemon) {
-    console.log(pokemon)
+        renderPokemon(pokemon)
     })
+}
+
+function releasePokemon(e) {
+    const pokemonId = e.target.dataset.pokemonId
+
+    const configObj = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    }
+
+    fetch(`${POKEMONS_URL}/${pokemonId}`, configObj) 
+        .then(function(resp) {
+            return resp.json()
+        })
+        .then(function(pokemon) {
+            const releasedPokemon = document.getElementById(`poke-${pokemon.id}`)
+            releasedPokemon.remove()
+        })
 }
 
 
