@@ -33,6 +33,8 @@ function makeTrainerCard(trainer) {
     addPokeButton.innerText = "Add Pokemon"
     card.appendChild(addPokeButton)
 
+    addPokeButton.addEventListener('click', addPokemon) 
+
     const pokemonList = document.createElement('ul')
     pokemonList.id = `trainer-${trainer.id}-pokemon`
     card.appendChild(pokemonList)
@@ -57,3 +59,30 @@ function renderPokemon(pokemon) {
         pokeLi.appendChild(releaseButton)
         pokemonList.appendChild(pokeLi)
 }
+
+function addPokemon(e) {
+    const trainerId = e.target.dataset.trainerId
+
+    const pokeData = {
+        trainerId: trainerId
+    }
+    
+    const configObj = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(pokeData)
+    }
+
+    fetch(POKEMONS_URL, configObj) 
+    .then(function(resp) {
+    return resp.json()
+    })
+    .then(function(pokemon) {
+    console.log(pokemon)
+    })
+}
+
+

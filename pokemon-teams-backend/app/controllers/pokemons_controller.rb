@@ -8,4 +8,8 @@ class PokemonsController < ApplicationController
         pokemon = Pokemon.find_by(id: params[:id])
         render json: pokemon, include: [:trainer]
     end
+
+    def create
+        binding.pry
+    end
 end
